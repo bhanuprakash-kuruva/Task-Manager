@@ -1,12 +1,7 @@
-Here is your `README.md` in the **exact format** you requested, but with details specific to your **Task Manager App**:  
-
----
-
-```md
 # Task Manager App
 
 ## Live URL
-[Task Manager App](https://your-live-url.com/) - (https://your-live-url.com/)
+[Task Manager App](https://task-manager-hco5.onrender.com/) - (https://task-manager-hco5.onrender.com/)
 
 **⚠ Warning:** This application is deployed on Render. Please wait for some time if the server is inactive.
 
@@ -14,7 +9,7 @@ Here is your `README.md` in the **exact format** you requested, but with details
 Task Manager App allows users to manage their tasks, including creating, updating, retrieving, and deleting tasks. User authentication is required for most operations, using JWT tokens.
 
 ## Tech Stack
-- **Frontend:** React.js, Tailwind CSS
+- **Frontend:** React.js, Material UI
 - **Backend:** Node.js, Express.js
 - **Database:** MongoDB
 
@@ -212,7 +207,8 @@ Authorization: Bearer <your_token>
 ### **Home Page**
 ![Home](https://github.com/bhanuprakash-kuruva/Task-Manager/blob/main/task-app/src/assets/Home.png?raw=true)
 
-
+### **Tasks Page**
+![Tasks](https://github.com/bhanuprakash-kuruva/Task-Manager/blob/main/task-app/src/assets/Tasks.png?raw=true)
 
 ### **Profile Page**
 ![Profile](https://github.com/bhanuprakash-kuruva/Task-Manager/blob/main/task-app/src/assets/Profile.png?raw=true)
@@ -231,29 +227,22 @@ Authorization: Bearer <your_token>
 
 
 
-![Update Task](https://github.com/bhanuprakash-kuruva/Task-Manager/blob/main/task-app/src/assets/task.png?raw=true)
+
+
+---
+
+## About the Author
+
+### Bhanu Prakash Kuruva
+Bhanu Prakash is a passionate full-stack developer specializing in the **MERN (MongoDB, Express.js, React.js, Node.js) stack**. He has built various applications, including blogging platforms, restaurant apps, and AI-powered chatbots. Bhanu is always eager to explore **AI integrations, data visualization, and automation** in web applications. He is an **NSS Volunteer**, demonstrating his dedication to both technology and community service.
+
+🔗 **LinkedIn:** [Bhanu Prakash Kuruva](https://linkedin.com/in/bhanuprakash-kuruva)  
+🔗 **GitHub:** [bhanuprakash-kuruva](https://github.com/bhanuprakash-kuruva)
 
 ---
 
 ## Live URL
-[Task Manager App](https://your-live-url.com/) - (https://your-live-url.com/)
+[Task Manager App](https://task-manager-hco5.onrender.com/) - (https://task-manager-hco5.onrender.com/)
 
 **⚠ Warning:** This application is deployed on Render. Please wait for some time if the server is inactive.
-```
 
----
-
-### **How to Update Your README on GitHub**
-1. Open your terminal and navigate to your project folder.
-2. Replace the old `README.md` file with the updated version.
-3. Run the following commands:
-   ```sh
-   git add README.md
-   git commit -m "Updated README with correct format and images"
-   git push origin main
-   ```
-4. Refresh your GitHub repository to see the changes.
-
----
-
-Now your `README.md` follows the exact format you requested and includes correct **image URLs**, **API endpoints**, **installation steps**, and **live URL section**. 🚀 Let me know if you need any modifications! 😊
