@@ -48,6 +48,7 @@ router.post("/tasks", async (req, res) => {
 router.get("/tasks", async (req, res) => {
   try {
     const tasks = await Task.find();
+    console.log(tasks)
     res.status(200).json(tasks);
   } catch (error) {
     res.status(500).json({ message: error.message });
