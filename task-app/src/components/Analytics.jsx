@@ -6,7 +6,7 @@ import Layout from "./Layout/Layout";
 import { AuthContext } from "../contextAPI/context";
 import { useNavigate } from "react-router-dom";
 
-const API_URL = "http://localhost:5019/api/tasks"; // Backend URL
+const API_URL = "/api/tasks"; // Backend URL
 
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28"]; // Colors for Pie Chart
 
