@@ -34,7 +34,7 @@ app.use(cors());
 app.use(express.json());
 
 // Routes
-app.use("http://localhost:5019/api", taskRoutes);
+app.use("/api", taskRoutes);
 app.use("/users", userRoutes);
 
 // Serve frontend (if applicable)
