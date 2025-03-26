@@ -47,6 +47,7 @@ router.post("/tasks", async (req, res) => {
 // ✅ Get all tasks
 router.get("/tasks", async (req, res) => {
   try {
+    console.log('1234')
     const tasks = await Task.find();
     console.log(tasks)
     res.status(200).json(tasks);
