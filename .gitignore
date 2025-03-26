@@ -1,0 +1,4 @@
+task-app/node_modules
+task-app/.env
+backend/.env
+backend/node_modules
