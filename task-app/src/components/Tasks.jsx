@@ -16,7 +16,7 @@
 // import { useNavigate } from "react-router-dom";
 // import SearchTask from "./SearchTask";
 
-// const API_URL = "http://localhost:5019/api/tasks"; // Backend URL
+// const API_URL = "/api/tasks"; // Backend URL
 
 // const TaskManager = () => {
 //   const { user } = useContext(AuthContext);
@@ -72,7 +72,7 @@
 //     try {
 //       if (editMode) {
 //         console.log(taskData)
-//         await axios.put(`http://localhost:5019/api/update-task/${selectedTaskId}`, taskData);
+//         await axios.put(`/api/update-task/${selectedTaskId}`, taskData);
 //       } else {
 //         await axios.post(API_URL, taskData);
 //       }
@@ -234,7 +234,7 @@ import Layout from "./Layout/Layout";
 import { AuthContext } from "../contextAPI/context";
 import SearchTask from "./SearchTask";
 
-const API_URL = "http://localhost:5019/api/tasks"; // Backend API URL
+const API_URL = "/api/tasks"; // Backend API URL
 
 const TaskManager = () => {
   const { user } = useContext(AuthContext);
@@ -284,7 +284,7 @@ const TaskManager = () => {
      
       if (editMode) {
        
-        await axios.put(`http://localhost:5019/api/update-task/${selectedTaskId}`, formattedTaskData);
+        await axios.put(`/api/update-task/${selectedTaskId}`, formattedTaskData);
       } else {
         await axios.post(API_URL, formattedTaskData);
       }

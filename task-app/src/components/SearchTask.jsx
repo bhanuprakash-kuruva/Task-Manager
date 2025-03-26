@@ -22,7 +22,7 @@ import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import SearchIcon from "@mui/icons-material/Search";
 
-const API_URL = "http://localhost:5019/api/tasks"; // Update with your API URL
+const API_URL = "/api/tasks"; // Update with your API URL
 
 const SearchTask = () => {
   const [tasks, setTasks] = useState([]); // ✅ Store multiple tasks

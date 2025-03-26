@@ -22,7 +22,7 @@ import EmailIcon from "@mui/icons-material/Email";
 import BadgeIcon from "@mui/icons-material/Badge";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 
-const API_URL = "http://localhost:5019/users"; // Update with your API URL
+const API_URL = "/users"; // Update with your API URL
 
 const UserProfile = ({ userId }) => {
   const [user, setUser] = useState(null);

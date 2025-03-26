@@ -33,7 +33,7 @@ import { AuthContext } from "../contextAPI/context";
 import Layout from "./Layout/Layout";
 
 import {useNavigate} from 'react-router-dom'
-const API_URL = "http://localhost:5019/users"; 
+const API_URL = "/users"; 
 
 const UserProfilePage = () => {
   const { user, logout } = useContext(AuthContext);
@@ -74,7 +74,7 @@ const UserProfilePage = () => {
   const handleStatusChange = async (taskId, newStatus) => {
     setLoading(true);
     try {
-      await axios.put(`http://localhost:5019/api/tasks/${taskId}`, { status: newStatus });
+      await axios.put(`/api/tasks/${taskId}`, { status: newStatus });
       fetchUserProfile(user.email);
     } catch (error) {
       console.log(error);

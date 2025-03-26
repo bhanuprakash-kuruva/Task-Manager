@@ -34,7 +34,7 @@ import Layout from "./Layout/Layout";
 import { useNavigate } from "react-router-dom";
 import UserProfile from "./SearchUser";
 
-const API_URL = "http://localhost:5019/users";
+const API_URL = "/users";
 
 const Users = () => {
     const navigate = useNavigate();

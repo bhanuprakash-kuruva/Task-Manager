@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { TextField, Button, Container, Typography, Paper, Box, Select, MenuItem } from "@mui/material";
 import Layout from "./Layout/Layout";
 
-const API_URL = "http://localhost:5019/users/register"; // Backend registration route
+const API_URL = "/users/register"; // Backend registration route
 
 const SignUp = () => {
   const [formData, setFormData] = useState({ name: "", email: "", password: "", role: "User" });
