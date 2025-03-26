@@ -64,7 +64,7 @@ const TaskManager = () => {
      
       if (editMode) {
        
-        await axios.put(`http://localhost:5019/api/update-task/${selectedTaskId}`, formattedTaskData);
+        await axios.put(`/api/update-task/${selectedTaskId}`, formattedTaskData);
       } else {
         await axios.post(API_URL, formattedTaskData);
       }
