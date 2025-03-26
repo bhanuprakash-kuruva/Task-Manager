@@ -12,7 +12,7 @@
 // app.use(cors());
 // app.use(express.json());
 
-// app.use("/api", taskRoutes);
+// app.use("http://localhost:5019/api", taskRoutes);
 // app.use('/users',userRoutes);
 // app.get('*',(req,res)=>{
 //     res.sendFile(path.join(__dirname,'..','task-app','dist','index.html'));
@@ -34,7 +34,7 @@ app.use(cors());
 app.use(express.json());
 
 // Routes
-app.use("/api", taskRoutes);
+app.use("http://localhost:5019/api", taskRoutes);
 app.use("/users", userRoutes);
 
 // Serve frontend (if applicable)

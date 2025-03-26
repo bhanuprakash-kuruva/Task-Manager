@@ -74,7 +74,7 @@ const UserProfilePage = () => {
   const handleStatusChange = async (taskId, newStatus) => {
     setLoading(true);
     try {
-      await axios.put(`/api/tasks/${taskId}`, { status: newStatus });
+      await axios.put(`http://localhost:5019/api/tasks/${taskId}`, { status: newStatus });
       fetchUserProfile(user.email);
     } catch (error) {
       console.log(error);
