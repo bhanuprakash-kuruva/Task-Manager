@@ -149,8 +149,9 @@ const Analytics = () => {
   const fetchTasks = async () => {
     try {
       const response = await axios.get(API_URL);
+        
       const data = response.data;
-
+        console.log(data)
       if (Array.isArray(data)) {
         setTasks(data);
         calculateStats(data);
