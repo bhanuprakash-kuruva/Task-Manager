@@ -58,7 +58,7 @@ const UserProfilePage = () => {
     setLoading(true);
     setError("");
     try {
-      const response = await axios.get(`${API_URL}users/${email}`);
+      const response = await axios.get(`${API_URL}api/users/${email}`);
       setU(response.data);
       setUpdatedUser({
         name: response.data.name,
@@ -74,7 +74,7 @@ const UserProfilePage = () => {
   const handleStatusChange = async (taskId, newStatus) => {
     setLoading(true);
     try {
-      await axios.put(`${API_URL}tasks/${taskId}`, { status: newStatus });
+      await axios.put(`${API_URL}api/tasks/${taskId}`, { status: newStatus });
       fetchUserProfile(user.email);
     } catch (error) {
       console.log(error);
@@ -101,7 +101,7 @@ const UserProfilePage = () => {
 
   const handleUpdateProfile = async () => {
     try {
-      await axios.put(`${API_URL}users/${u._id}`, updatedUser);
+      await axios.put(`${API_URL}api/users/${u._id}`, updatedUser);
       setU(updatedUser);
       handleCloseEditModal();
     } catch (error) {

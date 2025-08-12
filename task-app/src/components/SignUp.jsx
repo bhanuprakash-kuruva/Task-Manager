@@ -24,7 +24,7 @@ const SignUp = () => {
 
     try {
       console.log(formData)
-      await axios.post(`${API_URL}users/register`, formData);
+      await axios.post(`${API_URL}api/users/register`, formData);
       setSuccess("Registration successful! Redirecting...");
       setTimeout(() => navigate("/signin"), 2000);
     } catch (error) {

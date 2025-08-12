@@ -39,7 +39,7 @@ const SearchTask = () => {
     setError("");
     console.log('edit')
     try {
-      const response = await axios.get(`${API_URL}tasks/${searchQuery}`);
+      const response = await axios.get(`${API_URL}api/tasks/${searchQuery}`);
       if (response.data.length > 0) {
         setTasks(response.data); // ✅ Store all matching tasks
       } else {

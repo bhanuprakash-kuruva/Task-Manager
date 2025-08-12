@@ -122,7 +122,7 @@
 //   // ✅ Update task status
 //   const handleStatusChange = async (taskId, newStatus) => {
 //     try {
-//       await axios.put(`${API_URL}/${taskId}`, { status: newStatus });
+//       await axios.put(`${API_URL}api//${taskId}`, { status: newStatus });
 //       fetchTasks();
 //     } catch (error) {
 //       showError("Error updating task status.");
@@ -135,7 +135,7 @@
 //   // ✅ Delete a task
 //   const handleDelete = async (taskId) => {
 //     try {
-//       await axios.delete(`${API_URL}/${taskId}`);
+//       await axios.delete(`${API_URL}api//${taskId}`);
 //       fetchTasks();
 //     } catch (error) {
 //       showError("Error deleting task.");
@@ -260,7 +260,7 @@ const TaskManager = () => {
   // Fetch tasks when component mounts
   const fetchTasks = async () => {
     try {
-      const response = await axios.get(`${API_URL}tasks/get-all`);
+      const response = await axios.get(`${API_URL}api/tasks/get-all`);
       console.log("Fetched tasks:", response.data); // DEBUG
       if (Array.isArray(response.data)) {
         setTasks(response.data);
@@ -296,10 +296,10 @@ const TaskManager = () => {
 
       if (editMode) {
         console.log(formattedTaskData)
-        await axios.put(`${API_URL}tasks/update-task/${selectedTaskId}`, formattedTaskData);
+        await axios.put(`${API_URL}api/tasks/update-task/${selectedTaskId}`, formattedTaskData);
       } else {
         console.log(formattedTaskData)
-        await axios.post(`${API_URL}tasks/`, formattedTaskData);
+        await axios.post(`${API_URL}api/tasks/`, formattedTaskData);
       }
 
       fetchTasks();
@@ -355,7 +355,7 @@ const TaskManager = () => {
   // Delete a Task
   const handleDelete = async (taskId) => {
     try {
-      await axios.delete(`${API_URL}tasks/${taskId}`);
+      await axios.delete(`${API_URL}api/tasks/${taskId}`);
       fetchTasks();
     } catch (error) {
       console.error("Error deleting task:", error);

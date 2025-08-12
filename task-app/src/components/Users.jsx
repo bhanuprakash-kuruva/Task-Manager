@@ -64,7 +64,7 @@ const Users = () => {
 
     const fetchUsers = async () => {
         try {
-            const response = await axios.get(`${API_URL}users/`);
+            const response = await axios.get(`${API_URL}api/users/`);
             setUsers(response.data);
         } catch (error) {
             console.error("Error fetching users:", error);
@@ -91,7 +91,7 @@ const Users = () => {
     const handleDelete = async (id) => {
         if (window.confirm("Are you sure you want to delete this user?")) {
             try {
-                await axios.delete(`${API_URL}users/${id}`);
+                await axios.delete(`${API_URL}api/users/${id}`);
                 fetchUsers();
                 setSnackbar({ open: true, message: "User deleted successfully!", severity: "success" });
             } catch (error) {
@@ -117,10 +117,10 @@ const Users = () => {
     const handleRegisterOrUpdate = async () => {
         try {
             if (editMode) {
-                await axios.put(`${API_URL}users/${selectedUser._id}`, newUser);
+                await axios.put(`${API_URL}api/users/${selectedUser._id}`, newUser);
                 setSnackbar({ open: true, message: "User updated successfully!", severity: "success" });
             } else {
-                await axios.post(`${API_URL}users/adminAddedRegister`, newUser);
+                await axios.post(`${API_URL}api/users/adminAddedRegister`, newUser);
                 console.log('complete')
                 setSnackbar({ open: true, message: "User added successfully!", severity: "success" });
             }

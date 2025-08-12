@@ -23,7 +23,7 @@ const Analytics = () => {
   // ✅ Fetch all tasks
   const fetchTasks = async () => {
     try {
-      const response = await axios.get(`${API_URL}tasks/get-all`);
+      const response = await axios.get(`${API_URL}api/tasks/get-all`);
       setTasks(response.data);
       calculateStats(response.data);
     } catch (error) {

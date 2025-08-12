@@ -106,7 +106,7 @@ const SignIn = () => {
     setError("");
     console.log(formData);
     try {
-      const response = await axios.post(`${API_URL}users/login`, formData);
+      const response = await axios.post(`${API_URL}api/users/login`, formData);
       login(response.data.user, response.data.token);
       navigate("/"); // Redirect to home page
     } catch (error) {

@@ -36,7 +36,7 @@ const UserProfile = ({ userId }) => {
   const fetchUserById = async (id) => {
     setLoading(true);
     try {
-      const response = await axios.get(`${API_URL}users/${id}`);
+      const response = await axios.get(`${API_URL}api/users/${id}`);
       setUser(response.data);
       setError("");
     } catch (err) {
