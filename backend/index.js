@@ -14,7 +14,7 @@ const app = express();
 // ✅ Allow frontend from Vercel + local dev
 app.use(cors({
   origin: [
-    "https://task-manager-ashen-seven-35.vercel.app", // Your deployed frontend
+    process.env.FRONTEND_URL, // Your deployed frontend
     "http://localhost:5173" // Local dev frontend (optional)
   ],
   credentials: true
