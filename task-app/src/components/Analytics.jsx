@@ -6,7 +6,7 @@ import Layout from "./Layout/Layout";
 import { AuthContext } from "../contextAPI/context";
 import { useNavigate } from "react-router-dom";
 
-const API_URL = "http://localhost:5019/api/tasks"; // Backend URL
+const API_URL = import.meta.env.VITE_API_URL // Backend URL
 
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28"]; // Colors for Pie Chart
 
@@ -23,7 +23,7 @@ const Analytics = () => {
   // ✅ Fetch all tasks
   const fetchTasks = async () => {
     try {
-      const response = await axios.get(API_URL);
+      const response = await axios.get(`${API_URL}tasks/get-all`);
       setTasks(response.data);
       calculateStats(response.data);
     } catch (error) {

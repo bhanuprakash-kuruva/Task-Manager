@@ -16,7 +16,7 @@
 // import { useNavigate } from "react-router-dom";
 // import SearchTask from "./SearchTask";
 
-// const API_URL = "http://localhost:5019/api/tasks"; // Backend URL
+// const API_URL = "http://localhost:5021/api/tasks"; // Backend URL
 
 // const TaskManager = () => {
 //   const { user } = useContext(AuthContext);
@@ -72,7 +72,7 @@
 //     try {
 //       if (editMode) {
 //         console.log(taskData)
-//         await axios.put(`http://localhost:5019/api/update-task/${selectedTaskId}`, taskData);
+//         await axios.put(`http://localhost:5021/api/update-task/${selectedTaskId}`, taskData);
 //       } else {
 //         await axios.post(API_URL, taskData);
 //       }
@@ -224,7 +224,7 @@ import axios from "axios";
 import {
   Box, Typography, Card, CardContent, CardActions, Button,
   Dialog, DialogTitle, DialogContent, DialogActions,
-  TextField, Select, MenuItem, Grid, Collapse, Paper, IconButton
+  TextField, Grid, Collapse, Paper
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
@@ -234,10 +234,13 @@ import Layout from "./Layout/Layout";
 import { AuthContext } from "../contextAPI/context";
 import SearchTask from "./SearchTask";
 
-const API_URL = "http://localhost:5019/api/tasks"; // Backend API URL
+const API_URL = import.meta.env.VITE_API_URL; // Backend API URL
 
 const TaskManager = () => {
-  const { user } = useContext(AuthContext);
+  const { user,loading } = useContext(AuthContext);
+  if(loading){
+    return <div>loading...</div>
+  }
   const [tasks, setTasks] = useState([]);
   const [open, setOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
@@ -255,50 +258,60 @@ const TaskManager = () => {
   });
 
   // Fetch tasks when component mounts
+  const fetchTasks = async () => {
+    try {
+      const response = await axios.get(`${API_URL}tasks/get-all`);
+      console.log("Fetched tasks:", response.data); // DEBUG
+      if (Array.isArray(response.data)) {
+        setTasks(response.data);
+      } else if (Array.isArray(response.data.tasks)) {
+        setTasks(response.data.tasks);
+      } else {
+        setTasks([]);
+      }
+    } catch (error) {
+      console.error("Error fetching tasks:", error);
+      setErrorMessage("Error fetching tasks. Please try again.");
+      setTasks([]);
+    }
+  };
   useEffect(() => {
     fetchTasks();
   }, []);
 
-  const fetchTasks = async () => {
-    try {
-      const response = await axios.get(API_URL);
-      setTasks(response.data);
-    } catch (error) {
-      setErrorMessage("Error fetching tasks. Please try again.");
-    }
-  };
+  
 
   // Handle Save (Create or Update)
   const handleSaveTask = async () => {
-    console.log('upadte')
     try {
       if (!taskData.title || !taskData.description || !taskData.assignedTo || !taskData.deadline) {
         setErrorMessage("All fields are required.");
         return;
       }
-   
+
       const formattedTaskData = {
         ...taskData,
         deadline: new Date(taskData.deadline).toISOString(),
       };
-     
+
       if (editMode) {
-       
-        await axios.put(`http://localhost:5019/api/update-task/${selectedTaskId}`, formattedTaskData);
+        console.log(formattedTaskData)
+        await axios.put(`${API_URL}tasks/update-task/${selectedTaskId}`, formattedTaskData);
       } else {
-        await axios.post(API_URL, formattedTaskData);
+        console.log(formattedTaskData)
+        await axios.post(`${API_URL}tasks/`, formattedTaskData);
       }
 
       fetchTasks();
       handleCloseDialog();
     } catch (error) {
+      console.error("Error saving task:", error);
       setErrorMessage(editMode ? "Error updating task." : "Error creating task.");
     }
   };
 
   // Open Edit Dialog
   const handleEdit = (task) => {
-   
     setTaskData({
       title: task.title,
       description: task.description,
@@ -307,7 +320,7 @@ const TaskManager = () => {
       deadline: task.deadline ? task.deadline.split("T")[0] : "",
       status: task.status,
     });
-    
+
     setSelectedTaskId(task._id);
     setEditMode(true);
     setOpen(true);
@@ -342,9 +355,10 @@ const TaskManager = () => {
   // Delete a Task
   const handleDelete = async (taskId) => {
     try {
-      await axios.delete(`${API_URL}/${taskId}`);
+      await axios.delete(`${API_URL}tasks/${taskId}`);
       fetchTasks();
     } catch (error) {
+      console.error("Error deleting task:", error);
       setErrorMessage("Error deleting task.");
     }
   };
@@ -358,13 +372,11 @@ const TaskManager = () => {
 
         {/* Create & Search Buttons */}
         <Box sx={{ display: "flex", justifyContent: "center", gap: 2, mb: 3 }}>
-          {
-            user.role==="Admin" &&(
-              <Button variant="contained" color="primary" startIcon={<AddIcon />} onClick={handleOpenDialog} sx={{ borderRadius: 20 }}>
-            Create Task
-          </Button>
-            )
-          }
+          {user.role === "Admin" && (
+            <Button variant="contained" color="primary" startIcon={<AddIcon />} onClick={handleOpenDialog} sx={{ borderRadius: 20 }}>
+              Create Task
+            </Button>
+          )}
           <Button variant="outlined" startIcon={<SearchIcon />} onClick={handleSearchOpen} sx={{ borderRadius: 20 }}>
             Search Tasks
           </Button>
@@ -383,7 +395,7 @@ const TaskManager = () => {
           <DialogContent>
             <TextField label="Title" fullWidth value={taskData.title} onChange={(e) => setTaskData({ ...taskData, title: e.target.value })} sx={{ my: 1 }} />
             <TextField label="Description" fullWidth value={taskData.description} onChange={(e) => setTaskData({ ...taskData, description: e.target.value })} sx={{ my: 1 }} />
-            <TextField label="Assigned To" fullWidth value={taskData.assignedTo} onChange={(e) => setTaskData({ ...taskData, assignedTo: e.target.value })} sx={{ my: 1 }} />
+            <TextField label="Assigned To (Enter username correctly)" fullWidth value={taskData.assignedTo} onChange={(e) => setTaskData({ ...taskData, assignedTo: e.target.value })} sx={{ my: 1 }} />
             <TextField type="date" fullWidth value={taskData.deadline} onChange={(e) => setTaskData({ ...taskData, deadline: e.target.value })} sx={{ my: 1 }} />
           </DialogContent>
           <DialogActions>
@@ -396,7 +408,7 @@ const TaskManager = () => {
 
         {/* Task Cards Grid */}
         <Grid container spacing={3}>
-          {tasks.map((task) => (
+          {Array.isArray(tasks) && tasks.map((task) => (
             <Grid item xs={12} sm={6} md={4} key={task._id}>
               <Card sx={{ boxShadow: 3, borderRadius: 3 }}>
                 <CardContent>

@@ -33,7 +33,7 @@ import { AuthContext } from "../contextAPI/context";
 import Layout from "./Layout/Layout";
 
 import {useNavigate} from 'react-router-dom'
-const API_URL = "/users"; 
+const API_URL = import.meta.env.VITE_API_URL; 
 
 const UserProfilePage = () => {
   const { user, logout } = useContext(AuthContext);
@@ -58,7 +58,7 @@ const UserProfilePage = () => {
     setLoading(true);
     setError("");
     try {
-      const response = await axios.get(`${API_URL}/${email}`);
+      const response = await axios.get(`${API_URL}users/${email}`);
       setU(response.data);
       setUpdatedUser({
         name: response.data.name,
@@ -74,7 +74,7 @@ const UserProfilePage = () => {
   const handleStatusChange = async (taskId, newStatus) => {
     setLoading(true);
     try {
-      await axios.put(`http://localhost:5019/api/tasks/${taskId}`, { status: newStatus });
+      await axios.put(`${API_URL}tasks/${taskId}`, { status: newStatus });
       fetchUserProfile(user.email);
     } catch (error) {
       console.log(error);
@@ -101,7 +101,7 @@ const UserProfilePage = () => {
 
   const handleUpdateProfile = async () => {
     try {
-      await axios.put(`${API_URL}/${u._id}`, updatedUser);
+      await axios.put(`${API_URL}users/${u._id}`, updatedUser);
       setU(updatedUser);
       handleCloseEditModal();
     } catch (error) {

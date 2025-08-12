@@ -22,7 +22,7 @@ import EmailIcon from "@mui/icons-material/Email";
 import BadgeIcon from "@mui/icons-material/Badge";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 
-const API_URL = "/users"; // Update with your API URL
+const API_URL = import.meta.env.VITE_API_URL; // Update with your API URL
 
 const UserProfile = ({ userId }) => {
   const [user, setUser] = useState(null);
@@ -36,7 +36,7 @@ const UserProfile = ({ userId }) => {
   const fetchUserById = async (id) => {
     setLoading(true);
     try {
-      const response = await axios.get(`${API_URL}/${id}`);
+      const response = await axios.get(`${API_URL}users/${id}`);
       setUser(response.data);
       setError("");
     } catch (err) {

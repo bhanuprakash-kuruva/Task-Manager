@@ -4,7 +4,7 @@ const Task = require("../models/task");
 const User = require("../models/user");
 
 // ✅ Create a new task
-router.post("/tasks", async (req, res) => {
+router.post("/", async (req, res) => {
   console.log('hi')
   try {
     const { title, description, assignedBy, assignedTo, deadline, status } = req.body;
@@ -45,9 +45,10 @@ router.post("/tasks", async (req, res) => {
 
 
 // ✅ Get all tasks
-router.get("/tasks", async (req, res) => {
+router.get("/get-all", async (req, res) => {
   try {
     const tasks = await Task.find();
+    console.log(tasks);
     res.status(200).json(tasks);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -55,7 +56,7 @@ router.get("/tasks", async (req, res) => {
 });
 
 // ✅ Get tasks assigned to a specific user
-router.get("/tasks/user/:assignedTo", async (req, res) => {
+router.get("/user/:assignedTo", async (req, res) => {
   try {
     const tasks = await Task.find({ assignedTo: req.params.assignedTo });
     res.status(200).json(tasks);
@@ -68,16 +69,14 @@ router.put("/update-task/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const updatedTask = req.body;
-
     // ✅ Check if the task exists
     const task = await Task.findById(id);
     if (!task) {
       return res.status(404).json({ message: "Task not found" });
     }
-
     // ✅ Update the task
     const newTask = await Task.findByIdAndUpdate(id, updatedTask, { new: true });
-
+    console.log(newTask)
     res.status(200).json({ message: "Task updated successfully", task: newTask });
   } catch (error) {
     console.error("Error updating task:", error);
@@ -86,7 +85,7 @@ router.put("/update-task/:id", async (req, res) => {
 });
 
 // ✅ Update task status
-router.put("/tasks/:id", async (req, res) => {
+router.put("/:id", async (req, res) => {
   try {
     const { status } = req.body;
 
@@ -106,7 +105,7 @@ router.put("/tasks/:id", async (req, res) => {
   }
 });
 
-router.get('/tasks/:id',async(req,res)=>{
+router.get('/:id',async(req,res)=>{
   try{
     const taskName = req.params.id;
     console.log(taskName)
@@ -125,7 +124,7 @@ router.get('/tasks/:id',async(req,res)=>{
 })
 
 // ✅ Delete a task
-router.delete("/tasks/:id", async (req, res) => {
+router.delete("/:id", async (req, res) => {
   try {
     const deletedTask = await Task.findByIdAndDelete(req.params.id);
 

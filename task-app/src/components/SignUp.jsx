@@ -4,14 +4,13 @@ import { useNavigate } from "react-router-dom";
 import { TextField, Button, Container, Typography, Paper, Box, Select, MenuItem } from "@mui/material";
 import Layout from "./Layout/Layout";
 
-const API_URL = "/users/register"; // Backend registration route
+const API_URL = import.meta.env.VITE_API_URL; // Backend registration route
 
 const SignUp = () => {
   const [formData, setFormData] = useState({ name: "", email: "", password: "", role: "User" });
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const navigate = useNavigate();
-
   // ✅ Handle input changes
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -24,7 +23,8 @@ const SignUp = () => {
     setSuccess("");
 
     try {
-      await axios.post(API_URL, formData);
+      console.log(formData)
+      await axios.post(`${API_URL}users/register`, formData);
       setSuccess("Registration successful! Redirecting...");
       setTimeout(() => navigate("/signin"), 2000);
     } catch (error) {

@@ -10,9 +10,9 @@ const Contact = () => {
   const [error, setError] = useState(null);
 
   // EmailJS credentials
-  const publicKey = "ifiSMYOG0wkyaAglb";
-  const serviceID = "service_c86pfd2";
-  const templateID = "template_xfa34u9";
+  const publicKey = import.meta.env.VITE_PUBLICKEY;
+  const serviceID = import.meta.env.VITE_SERVICEID;
+  const templateID = import.meta.env.VITE_TEMPLATEID;
 
   // Handle input change
   const handleChange = (e) => {

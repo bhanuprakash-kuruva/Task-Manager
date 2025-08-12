@@ -6,14 +6,16 @@ export const AuthContext = createContext();
 // ✅ AuthProvider Component
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-
+  const [loading, setLoading] = useState(true);
   // ✅ Load user from localStorage on app start
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     if (storedUser) {
       setUser(JSON.parse(storedUser));
     }
+    setLoading(false);
   }, []);
+  
 
   // ✅ Login function
   const login = (userData, token) => {
@@ -30,8 +32,8 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
-      {children}
+    <AuthContext.Provider value={{ user, login, logout ,loading}}>
+      {!loading && children}
     </AuthContext.Provider>
   );
 };

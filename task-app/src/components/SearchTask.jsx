@@ -22,7 +22,7 @@ import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import SearchIcon from "@mui/icons-material/Search";
 
-const API_URL = "http://localhost:5019/api/tasks"; // Update with your API URL
+const API_URL = import.meta.env.VITE_API_URL; // Update with your API URL
 
 const SearchTask = () => {
   const [tasks, setTasks] = useState([]); // ✅ Store multiple tasks
@@ -39,7 +39,7 @@ const SearchTask = () => {
     setError("");
     console.log('edit')
     try {
-      const response = await axios.get(`${API_URL}/${searchQuery}`);
+      const response = await axios.get(`${API_URL}tasks/${searchQuery}`);
       if (response.data.length > 0) {
         setTasks(response.data); // ✅ Store all matching tasks
       } else {

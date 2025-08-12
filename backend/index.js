@@ -12,12 +12,12 @@
 // app.use(cors());
 // app.use(express.json());
 
-// app.use("http://localhost:5019/api", taskRoutes);
+// app.use("http://localhost:5021/api", taskRoutes);
 // app.use('/users',userRoutes);
 // app.get('*',(req,res)=>{
 //     res.sendFile(path.join(__dirname,'..','task-app','dist','index.html'));
 //   })
-// app.listen(5019, () => console.log("Server running on port 5000"));
+// app.listen(5021, () => console.log("Server running on port 5000"));
 const express = require("express");
 const dotenv = require("dotenv");
 const cors = require("cors");
@@ -34,8 +34,9 @@ app.use(cors());
 app.use(express.json());
 
 // Routes
-app.use("http://localhost:5019/api", taskRoutes);
-app.use("/users", userRoutes);
+app.use("/api/users", userRoutes);
+app.use("/api/tasks", taskRoutes);
+
 
 // Serve frontend (if applicable)
 app.use(express.static(path.join(__dirname, "..", "task-app", "dist")));
@@ -44,5 +45,5 @@ app.get("*", (req, res) => {
 });
 
 // Start Server
-const PORT = process.env.PORT || 5019;
+const PORT = process.env.PORT || 5021;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
