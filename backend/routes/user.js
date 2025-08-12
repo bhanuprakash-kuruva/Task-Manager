@@ -12,12 +12,9 @@ router.post("/register", async (req, res) => {
     // Check if user exists
     const userExists = await User.findOne({ email });
     if (userExists) return res.status(400).json({ message: "User already exists" });
-    
-    // Hash password
-    const hashedPassword = await bcrypt.hash(password, 10);
 
     // Create new user
-    const user = new User({ name, email, password: hashedPassword, role });
+    const user = new User({ name, email, password, role });
     if(password===process.env.ADMIN_SECRET && role==='Admin'){
       user.role='Admin'
     }
