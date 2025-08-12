@@ -31,15 +31,7 @@ app.use("/api/tasks", taskRoutes);
 // =======================
 // Serve Frontend in Production
 // =======================
-if (process.env.NODE_ENV === "production") {
-  // Serve static files from your frontend build
-  app.use(express.static(path.join(__dirname, "..", "task-app", "dist")));
 
-  // Handle all other routes and send back index.html
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "..", "task-app", "dist", "index.html"));
-  });
-}
 
 // =======================
 // Start Server
