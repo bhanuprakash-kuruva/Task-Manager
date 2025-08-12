@@ -15,8 +15,10 @@ const app = express();
 app.use(cors({
   origin: [
     process.env.FRONTEND_URL, // Your deployed frontend
-    "http://localhost:5173" // Local dev frontend (optional)
+    "http://localhost:5173", // Local dev frontend (optional)
   ],
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true
 }));
 
@@ -30,10 +32,6 @@ app.use("/api/tasks", taskRoutes);
 app.get("/", (req, res) => {
   res.send("Task Manager API is running 🚀");
 });
-// =======================
-// Serve Frontend in Production
-// =======================
-
 
 // =======================
 // Start Server
