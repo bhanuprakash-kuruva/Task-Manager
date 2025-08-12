@@ -32,7 +32,12 @@ app.use("/api/tasks", taskRoutes);
 app.get("/", (req, res) => {
   res.send("Task Manager API is running 🚀");
 });
-
+app.options("*", cors({
+  origin: "https://task-manager-seven-sandy-96.vercel.app/",
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true
+}));
 // =======================
 // Start Server
 // =======================
